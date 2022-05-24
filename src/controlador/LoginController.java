@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import modelo.UsuarioLogin;
 
 /**
  * FXML Controller class
@@ -20,6 +21,8 @@ import javafx.scene.input.KeyEvent;
  * @author USUARIO
  */
 public class LoginController implements Initializable {
+    
+    UsuarioLogin model = new UsuarioLogin();
 
     @FXML
     private TextField txt_usuario;
@@ -47,6 +50,36 @@ public class LoginController implements Initializable {
                 
                 String usuario = txt_usuario.getText();
                 String contraseña = txt_contraseña.getText();
+                
+                int state = model.login(usuario, contraseña);
+                
+                if(state != -1){
+                    if(state == 1){
+                        
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Bienvenido.");
+                alert.showAndWait();
+                        
+                        
+                    }else if(state == 2){
+                
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Usuario Local.");
+                alert.showAndWait();
+                        
+                    }
+                }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Datos incorrectos.");
+                alert.showAndWait();
+                    
+                }
                 
             }else{
                 
