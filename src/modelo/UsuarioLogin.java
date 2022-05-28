@@ -21,8 +21,8 @@ public class UsuarioLogin {
             
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select tipo_usuario, estado from usuarios "
-                    + "where id_usuario = '" + usuario + "' and contraseña = '" + contraseña + "'");
+            "select nombre_usuario, estado from usuarios "
+                    + "where nombre_usuario = '" + usuario + "' and contraseña = '" + contraseña + "'");
             
             ResultSet rs = pst.executeQuery();
             

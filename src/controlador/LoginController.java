@@ -48,8 +48,8 @@ public class LoginController implements Initializable {
             
             if(!txt_usuario.getText().isEmpty() && !txt_contraseña.getText().isEmpty()){
                 
-                String usuario = txt_usuario.getText();
-                String contraseña = txt_contraseña.getText();
+                String usuario = txt_usuario.getText().trim();
+                String contraseña = txt_contraseña.getText().trim();
                 
                 int state = model.login(usuario, contraseña);
                 
