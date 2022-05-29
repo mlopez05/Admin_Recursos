@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.sql.*;
@@ -16,13 +12,12 @@ public class UsuarioLogin {
     public int login(String usuario, String contraseña){
         
         int estatus = 0;
-        
+            
         try{
             
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select nombre_usuario, estado from usuarios "
-                    + "where nombre_usuario = '" + usuario + "' and contraseña = '" + contraseña + "'");
+            "select nombre_usuario, estado, tipo_usuario from usuarios where nombre_usuario = '" + usuario + "' and contraseña = '" + contraseña + "'");
             
             ResultSet rs = pst.executeQuery();
             
@@ -30,15 +25,19 @@ public class UsuarioLogin {
                 
                 String tipo = rs.getString("tipo_usuario");
                 String estado = rs.getString("estado");
+                int valor = 0;
                 
                 if(tipo.equalsIgnoreCase("A") && estado.equalsIgnoreCase("A")){
-                    estatus = 1;
+                    valor = 1;
                 }else if(tipo.equalsIgnoreCase("U") && estado.equalsIgnoreCase("A")){
-                    estatus = 2;
+                    valor = 2;
                 }
+                
+                estatus = valor;
+        
             }else{
-                estatus = -1;
-            }
+                    estatus = -1;
+                }
             
         }catch(SQLException e){
             
@@ -52,5 +51,5 @@ public class UsuarioLogin {
         return estatus;
         
     }
-    
+   
 }

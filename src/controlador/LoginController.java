@@ -4,15 +4,23 @@
  */
 package controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modelo.UsuarioLogin;
 
 /**
@@ -53,41 +61,40 @@ public class LoginController implements Initializable {
                 
                 int state = model.login(usuario, contraseña);
                 
-                if(state != -1){
-                    if(state == 1){
+                if(state == 1){
+                    
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaAdministrador.fxml"));
+                        Parent root = loader.load();
                         
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Bienvenido.");
-                alert.showAndWait();
+                        VistaAdministradorController controladorAdmin = loader.getController();
                         
-                        
-                    }else if(state == 2){
-                
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Usuario Local.");
-                alert.showAndWait();
-                        
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setScene(scene);
+                        stage.showAndWait();
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Datos incorrectos.");
-                alert.showAndWait();
+                                 
+                }else if(state == -1){
+                
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Datos incorrectos.");
+                    alert.showAndWait();
                     
                 }
                 
             }else{
                 
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("Los campos son obligatorios.");
-                alert.showAndWait();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("Los campos son obligatorios.");
+                    alert.showAndWait();
                 
             }
         }
