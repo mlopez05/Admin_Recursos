@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="543.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VistaAdministradorController">
+<AnchorPane id="AnchorPane" fx:id="btn_Lista" onDragDetected="#listaSolicitudes" prefHeight="543.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VistaAdministradorController">
    <children>
       <Button fx:id="btn_Organizaciones" layoutX="115.0" layoutY="89.0" mnemonicParsing="false" onAction="#gestionarOrganizaciones" prefHeight="84.0" prefWidth="124.0">
          <graphic>
@@ -54,6 +54,34 @@
       <Label alignment="CENTER" layoutX="192.0" layoutY="17.0" prefHeight="41.0" prefWidth="389.0" text="Administrador">
          <font>
             <Font name="Tahoma Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_Pendientes" layoutX="208.0" layoutY="250.0" mnemonicParsing="false" onAction="#listaPendientes" prefHeight="84.0" prefWidth="124.0">
+         <graphic>
+            <ImageView fitHeight="76.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/editar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btn_Lista" layoutX="431.0" layoutY="250.0" mnemonicParsing="false" onAction="#listaSolicitudes" prefHeight="84.0" prefWidth="124.0">
+         <graphic>
+            <ImageView fitHeight="76.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/tecnico.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label alignment="CENTER" layoutX="177.0" layoutY="347.0" prefHeight="18.0" prefWidth="186.0" text="Solicitudes Pendientes">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="400.0" layoutY="347.0" prefHeight="18.0" prefWidth="186.0" text="Listado de Solicitudes">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
          </font>
       </Label>
    </children>
